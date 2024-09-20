@@ -30,7 +30,7 @@ namespace Printess.Mockup
         throw new InvalidOperationException("No userId or secret given.");
       }
 
-      var sample = new MockupUrlDto()
+      var sample = new MockupUrlOptions()
       {
         TemplateName = "Byxor", // you must at least provide a template name, all other options are optional
         MaximumWidth = 400,
@@ -40,7 +40,7 @@ namespace Printess.Mockup
       Console.WriteLine(url);
     }
 
-    public static string CreateMockupUrl(string userId, string secret, MockupUrlDto dto)
+    public static string CreateMockupUrl(string userId, string secret, MockupUrlOptions dto)
     {
       var byteSecret = Encoding.UTF8.GetBytes(secret);
       var sealingParameters = new Dictionary<string, string?>();
@@ -156,87 +156,68 @@ namespace Printess.Mockup
 
   }
 
-  public class MockupUrlDto
+  public class MockupUrlOptions
   {
 
     // The Printess template name you want to render the mockup image for. 
-    [JsonPropertyName("templateName"), Required]
     public required string TemplateName { get; set; }
 
     // The document you want to render. The mockup service will find this out automatically if you don't provide a specific one.
     // Usually preview documents are rendered and automatically picked.
-    [JsonPropertyName("documentName")]
     public string? DocumentName { get; set; }
 
     // Which version of the template should be used? For development you usually take the draft version.
     // When going live you should take the published version.
-    [JsonPropertyName("published")]
     public bool UsePublishedVersion { get; set; }
 
     // The maximum width of the mockup image generated. Maximum allowed value is 1000;
-    [JsonPropertyName("maxWidth")]
     public int MaximumWidth { get; set; }
 
     // The maximum height of the mockup image generated. Maximum allowed value is 1000;
-    [JsonPropertyName("maxHeight")]
     public int MaximumHeight { get; set; }
 
     // You can pass form fields to the mockup template. Provide the name and value here.
     // Please make sure you never name any form field in the template the same as any parameter here 
-    // (e.g. "document", "renderMode" is forbidden - all json names used here are forbidden)
-    [JsonPropertyName("formFields")]
     public Dictionary<string, string?>? FormFields { get; set; }
 
     // The render mode to take. Defaults to "buyer" which renders the same way as the buyer would see things.
     // Other options are not public yet.
-    [JsonPropertyName("renderMode")]
     public string RenderMode { get; set; }
 
     // The first merge template to apply.
-    [JsonPropertyName("merge1")]
     public string? MergeTemplate1 { get; set; }
 
     // The document to take from the merge template.
-    [JsonPropertyName("merge1document")]
     public string? MergeTemplate1Document { get; set; }
 
     // The document to merge to. 
-    [JsonPropertyName("merge1targetDocument")]
     public string? MergeTemplate1TargetDocument { get; set; }
 
     // The second merge template to apply.
-    [JsonPropertyName("merge2")]
     public string? MergeTemplate2 { get; set; }
 
     // The document to take from the merge template.
-    [JsonPropertyName("merge2document")]
     public string? MergeTemplate2Document { get; set; }
 
     // The document to merge to. 
-    [JsonPropertyName("merge2targetDocument")]
     public string? MergeTemplate2TargetDocument { get; set; }
 
     // The third merge template to apply.
-    [JsonPropertyName("merge3")]
     public string? MergeTemplate3 { get; set; }
 
     // The document to take from the merge template.
-    [JsonPropertyName("merge3document")]
     public string? MergeTemplate3Document { get; set; }
 
     // The document to merge to. 
-    [JsonPropertyName("merge3targetDocument")]
     public string? MergeTemplate3TargetDocument { get; set; }
 
     // You can apply snippet urls to be merged onto the template.
-    [JsonPropertyName("snippetUrl")]
     public string? SnippetUrl { get; set; }
 
     // The target document to merge the snippet to. Sometimes needed when the merge should not happen on the preview document.
-    [JsonPropertyName("snippetTargetDocumentName")]
     public string? SnippetTargetDocumentName { get; set; }
 
-    public MockupUrlDto()
+    public MockupUrlOptions()
     {
       RenderMode = "buyer";
       MaximumWidth = 1000;
