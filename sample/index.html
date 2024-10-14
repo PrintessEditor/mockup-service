@@ -42,6 +42,8 @@
       printess.detachAllHandlers();
       document.getElementById("printess-editor").style.display = "none";
 
+      // All the mockup template you want to show. Per default the preview document is used. 
+      // If you want to show a different one, you can specify the "documentName" as well.
       renderMockups(
         document.getElementById("mockups"), [
         {
@@ -61,6 +63,9 @@
       ], saveToken, onOpenMockup)
     }
 
+    // Initial template "Canvas".
+    // Please note that only exchange data is exchanged,
+    // so the template and the mockup template needs to have exchange ids set.
     const printess = await loadPrintess("Canvas", onAddToBasket);
 
   </script>
