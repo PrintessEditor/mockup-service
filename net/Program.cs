@@ -116,6 +116,11 @@ namespace Printess.Mockup
         }
       }
 
+      if (!string.IsNullOrWhiteSpace(dto.ContentTemplateName))
+      {
+        sealingParameters.Add("ctn", dto.ContentTemplateName);
+      }
+
       if (dto.FormFields != null)
       {
         foreach (var (key, value) in dto.FormFields)
@@ -216,6 +221,9 @@ namespace Printess.Mockup
 
     // The target document to merge the snippet to. Sometimes needed when the merge should not happen on the preview document.
     public string? SnippetTargetDocumentName { get; set; }
+
+    // The template or saveToken where you want to take content from. Works for images and simple text.
+    public string? ContentTemplateName { get; set; }
 
     public MockupUrlOptions()
     {

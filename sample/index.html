@@ -1,0 +1,69 @@
+<html>
+
+<head>
+  <title>Printess Mockup</title>
+  <style>
+    #mockups {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .mockup-div {
+      margin: 8px;
+    }
+
+    .mockup-image {
+      width: 200px;
+    }
+
+    .mockup-text {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="mockups">
+  </div>
+
+  <div id="printess-editor"
+    style="background-color: white; position: absolute; left: 20px; top: 20px; bottom: 20px; right: 20px;"></div>
+
+  <script type="module">
+    import { loadPrintess, renderMockups } from "./index.js";
+
+    async function onOpenMockup(templateName, saveToken) {
+      printess.attachAllHandlers();
+      document.getElementById("printess-editor").style.display = "block";
+      await printess.loadTemplateWithExchangeToken(templateName, saveToken);
+    }
+
+    function onAddToBasket(saveToken, thumbnailUrl) {
+      printess.detachAllHandlers();
+      document.getElementById("printess-editor").style.display = "none";
+
+      renderMockups(
+        document.getElementById("mockups"), [
+        {
+          templateName: "Wall-Tiles-Joined"
+        }, {
+          templateName: "Tote Bag"
+        }, {
+          templateName: "Puzzle Sample"
+        }, {
+          templateName: "Phone-Case"
+        }, {
+          templateName: "Pillow"
+        }, {
+          templateName: "Photo Mug",
+          documentName: "Mockup"
+        }
+      ], saveToken, onOpenMockup)
+    }
+
+    const printess = await loadPrintess("Canvas", onAddToBasket);
+
+  </script>
+</body>
+
+</html>

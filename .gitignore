@@ -1,3 +1,4 @@
 config.json
 net/bin/*
 net/obj/*
+sample/node_modules
