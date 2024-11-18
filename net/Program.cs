@@ -140,6 +140,9 @@ namespace Printess.Mockup
         url = "https://mockups.printess.com/user/image.png" + qs;
       }
 
+      // Please note: if you want to download the mockup image, you need to provide a header value for "User-Agent",
+      // otherwise the request will fail with a 403.
+
       return url;
     }
 
