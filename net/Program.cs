@@ -56,6 +56,11 @@ namespace Printess.Mockup
         sealingParameters.Add("p", dto.PagesToSkip.ToString(CultureInfo.InvariantCulture));
       }
 
+      if (!string.IsNullOrWhiteSpace(dto.DocumentSelection))
+      {
+        sealingParameters.Add("ds", dto.DocumentSelection);
+      }
+
       if (dto.UsePublishedVersion)
       {
         sealingParameters.Add("upv", "1");
@@ -178,6 +183,9 @@ namespace Printess.Mockup
     // The document you want to render. The mockup service will find this out automatically if you don't provide a specific one.
     // Usually preview documents are rendered and automatically picked.
     public string? DocumentName { get; set; }
+
+    // The document you want to be selected for rendering. Defaults to preview document, can be "production" for production document.
+    public string? DocumentSelection { get; set; }
 
     // Which version of the template should be used? For development you usually take the draft version.
     // When going live you should take the published version.
