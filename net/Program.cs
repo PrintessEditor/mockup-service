@@ -51,6 +51,11 @@ namespace Printess.Mockup
       sealingParameters.Add("w", dto.MaximumWidth.ToString(CultureInfo.InvariantCulture));
       sealingParameters.Add("h", dto.MaximumHeight.ToString(CultureInfo.InvariantCulture));
 
+      if (dto.PagesToSkip > 0)
+      {
+        sealingParameters.Add("p", dto.PagesToSkip.ToString(CultureInfo.InvariantCulture));
+      }
+
       if (dto.UsePublishedVersion)
       {
         sealingParameters.Add("upv", "1");
@@ -183,6 +188,9 @@ namespace Printess.Mockup
 
     // The maximum height of the mockup image generated. Maximum allowed value is 1000;
     public int MaximumHeight { get; set; }
+
+    // The count of pages you want to skip. Useful for multi page documents.
+    public int PagesToSkip { get; set; }
 
     // You can pass form fields to the mockup template. Provide the name and value here.
     // Please make sure you never name any form field in the template the same as any parameter here 
